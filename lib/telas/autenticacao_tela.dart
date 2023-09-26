@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loginpage/_comum/cores.dart';
 import 'package:loginpage/components/authentication_field_decoration.dart';
+import 'package:loginpage/services/authentication.dart';
 
 class AutenticacaoTela extends StatefulWidget {
   const AutenticacaoTela({super.key});
@@ -12,6 +13,11 @@ class AutenticacaoTela extends StatefulWidget {
 class _AutenticacaoTelaState extends State<AutenticacaoTela> {
   bool wantEnter = true;
   final _formKey = GlobalKey<FormState>();
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  final ServiceAuthentication _Authentication = ServiceAuthentication();
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +53,7 @@ class _AutenticacaoTelaState extends State<AutenticacaoTela> {
                         height: 32,
                       ),
                       TextFormField(
+                        controller: _emailController,
                         decoration: getAuthenticationInputDecoration("Usuário"),
                         validator: (String? value) {
                           //Validações de usuário ... User validation
@@ -60,6 +67,7 @@ class _AutenticacaoTelaState extends State<AutenticacaoTela> {
                       ),
                       const SizedBox(height: 8),
                       TextFormField(
+                        controller: _passwordController,
                         decoration: getAuthenticationInputDecoration("Senha"),
                         validator: (String? value) {
                           //Validações de usuário ... User validation
@@ -86,7 +94,7 @@ class _AutenticacaoTelaState extends State<AutenticacaoTela> {
                                 if (value == null) {
                                   return "Preencha a senha!!!";
                                 }
-                                if (value.length < 6) {
+                                if (value == _passwordController) {
                                   return "Senha inválida";
                                 }
                               },
@@ -125,8 +133,16 @@ class _AutenticacaoTelaState extends State<AutenticacaoTela> {
   }
 
   main_button_clicked() {
+    String email = _emailController.text;
+    String passsword = _passwordController.text;
     if (_formKey.currentState!.validate()) {
-      print("OK");
+      if(wantEnter){
+        print("Entrou");
+        print("${_passwordController}, ${_emailController}");
+        _Authentication.cadastrarUsusario(email: email, password: passsword);
+      } else{
+        print("Cadastro Validado");
+      }
     } else
       print("error!!");
   }
