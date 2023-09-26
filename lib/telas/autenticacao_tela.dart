@@ -11,6 +11,7 @@ class AutenticacaoTela extends StatefulWidget {
 
 class _AutenticacaoTelaState extends State<AutenticacaoTela> {
   bool wantEnter = true;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class _AutenticacaoTelaState extends State<AutenticacaoTela> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Form(
+              key: _formKey,
               child: Center(
                 child: SingleChildScrollView(
                   child: Column(
@@ -45,20 +47,49 @@ class _AutenticacaoTelaState extends State<AutenticacaoTela> {
                         height: 32,
                       ),
                       TextFormField(
-                        decoration: getAuthenticationInputDecoration("Usuário")
+                        decoration: getAuthenticationInputDecoration("Usuário"),
+                        validator: (String? value) {
+                          //Validações de usuário ... User validation
+                          if (value == null) {
+                            return "Preencha o campo usuário!!!";
+                          }
+                          if (value.length < 5 || !value.contains("@")) {
+                            return "Usuário inválido!!!";
+                          }
+                        },
                       ),
                       const SizedBox(height: 8),
                       TextFormField(
                         decoration: getAuthenticationInputDecoration("Senha"),
+                        validator: (String? value) {
+                          //Validações de usuário ... User validation
+                          if (value == null) {
+                            return "Preencha a senha!!!";
+                          }
+                          if (value.length < 6) {
+                            return "Senha inválida, minímo 6 caracteres!!!";
+                          }
+                        },
                         obscureText: true,
                       ),
-                      const SizedBox(height: 8,),
+                      const SizedBox(
+                        height: 8,
+                      ),
                       Visibility(
                         visible: !wantEnter,
                         child: Column(
                           children: [
                             TextFormField(
                               decoration: getAuthenticationInputDecoration("Confirme a Senha"),
+                              validator: (String? value) {
+                                //Validações de usuário ... User validation
+                                if (value == null) {
+                                  return "Preencha a senha!!!";
+                                }
+                                if (value.length < 6) {
+                                  return "Senha inválida";
+                                }
+                              },
                               obscureText: true,
                             ),
                           ],
@@ -68,7 +99,9 @@ class _AutenticacaoTelaState extends State<AutenticacaoTela> {
                         height: 16,
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          main_button_clicked();
+                        },
                         child: Text((wantEnter) ? "Login" : "Cadastrar"),
                       ),
                       const Divider(),
@@ -89,5 +122,12 @@ class _AutenticacaoTelaState extends State<AutenticacaoTela> {
         ],
       ),
     );
+  }
+
+  main_button_clicked() {
+    if (_formKey.currentState!.validate()) {
+      print("OK");
+    } else
+      print("error!!");
   }
 }

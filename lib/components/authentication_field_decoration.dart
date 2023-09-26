@@ -13,7 +13,12 @@ InputDecoration getAuthenticationInputDecoration(String label) {
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(45),
       borderSide: const BorderSide(color: MyColors.darkBlue, width: 2),
-    )
+    ),
+    errorBorder: OutlineInputBorder(
+   borderRadius: BorderRadius.circular(45),
+    borderSide: const BorderSide(color: Colors.red, width: 2),
+    ),
+
 
   );
 }
