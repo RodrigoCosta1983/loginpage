@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:loginpage/_comum/cores.dart';
+import 'package:loginpage/_comum/my_snackbar.dart';
 import 'package:loginpage/components/authentication_field_decoration.dart';
 import 'package:loginpage/services/authentication.dart';
+
 
 class AutenticacaoTela extends StatefulWidget {
   const AutenticacaoTela({super.key});
@@ -89,16 +91,15 @@ class _AutenticacaoTelaState extends State<AutenticacaoTela> {
                           children: [
                             TextFormField(
                               decoration: getAuthenticationInputDecoration("Confirme a Senha"),
-                              validator: (String? value) {
-                                //Validações de usuário ... User validation
+                              obscureText: true,
+                              validator: (String? value) {    //Validações de usuário ... User validation
                                 if (value == null) {
                                   return "Preencha a senha!!!";
                                 }
-                                if (value == _passwordController) {
+                                if (value.length < 6) {
                                   return "Senha inválida";
                                 }
                               },
-                              obscureText: true,
                             ),
                           ],
                         ),
@@ -132,18 +133,35 @@ class _AutenticacaoTelaState extends State<AutenticacaoTela> {
     );
   }
 
-  main_button_clicked() {
+  main_button_clicked() async {
     String email = _emailController.text;
     String passsword = _passwordController.text;
     if (_formKey.currentState!.validate()) {
-      if(wantEnter){
+      if (wantEnter) {
         print("Entrou");
-        print("${_passwordController}, ${_emailController}");
-        _Authentication.cadastrarUsusario(email: email, password: passsword);
-      } else{
+
+      } else {
         print("Cadastro Validado");
+        print("${_passwordController}, ${_emailController}");
+        _Authentication.cadastrarUsusario(email: email, password: passsword)
+            .then(
+              (String? erro) {
+            if (erro != null) {
+              //voltou com erro  ... returned with error
+              showSnackbar(context: context, texto: erro);
+            } else {
+              //deu certo ... it worked out
+              showSnackbar(
+                  context: context,
+                  texto: "Cadastro efetuado com sucesso!",
+                  isErro: false);
+            }
+          },
+        );
       }
-    } else
+      ;
+    } else {
       print("error!!");
+    }
   }
 }

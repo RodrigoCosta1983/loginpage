@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:loginpage/main.dart';
 import 'package:loginpage/telas/autenticacao_tela.dart';
 import 'firebase_options.dart';
 
-Future<void> main() async {
+  void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
