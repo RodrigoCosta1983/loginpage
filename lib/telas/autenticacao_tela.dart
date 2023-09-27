@@ -135,15 +135,20 @@ class _AutenticacaoTelaState extends State<AutenticacaoTela> {
 
   main_button_clicked() async {
     String email = _emailController.text;
-    String passsword = _passwordController.text;
+    String password = _passwordController.text;
     if (_formKey.currentState!.validate()) {
       if (wantEnter) {
         print("Entrou");
+        _Authentication.login_User(email: email, password: password).then((String? erro) {
+          if(erro != null){
+            showSnackbar(context: context, texto: erro);
+          }
+        });
 
       } else {
         print("Cadastro Validado");
         print("${_passwordController}, ${_emailController}");
-        _Authentication.cadastrarUsusario(email: email, password: passsword)
+        _Authentication.registerUser(email: email, password: password)
             .then(
               (String? erro) {
             if (erro != null) {
