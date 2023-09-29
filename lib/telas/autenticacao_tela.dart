@@ -56,7 +56,7 @@ class _AutenticacaoTelaState extends State<AutenticacaoTela> {
                       ),
                       TextFormField(
                         controller: _emailController,
-                        decoration: getAuthenticationInputDecoration("Usuário"),
+                        decoration: getAuthenticationInputDecoration("Email:"),
                         validator: (String? value) {
                           //Validações de usuário ... User validation
                           if (value == null) {
@@ -70,7 +70,7 @@ class _AutenticacaoTelaState extends State<AutenticacaoTela> {
                       const SizedBox(height: 8),
                       TextFormField(
                         controller: _passwordController,
-                        decoration: getAuthenticationInputDecoration("Senha"),
+                        decoration: getAuthenticationInputDecoration("Senha:"),
                         validator: (String? value) {
                           //Validações de usuário ... User validation
                           if (value == null) {
