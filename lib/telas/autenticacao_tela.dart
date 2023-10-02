@@ -48,11 +48,12 @@ class _AutenticacaoTelaState extends State<AutenticacaoTela> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Image.asset(
-                        "assets/images/DEV_LOGO-semfundo.png",
-                        height: 158,
+                        "assets/images/logo.png",
+                        height: 55,
+
                       ),
                       const SizedBox(
-                        height: 32,
+                        height: 12,
                       ),
                       TextFormField(
                         controller: _emailController,

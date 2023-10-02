@@ -5,6 +5,7 @@ import 'package:loginpage/telas/autenticacao_tela.dart';
 import 'package:loginpage/telas/home_screen.dart';
 import 'firebase_options.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

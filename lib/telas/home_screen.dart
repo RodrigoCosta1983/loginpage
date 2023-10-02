@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:loginpage/main.dart';
 import 'package:loginpage/services/authentication.dart';
 import 'autenticacao_tela.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
   runApp(const homePage());
@@ -26,8 +25,8 @@ class homePage extends StatelessWidget {
           )
         ],),
       ),
+
     );
 
   }
 }
-
