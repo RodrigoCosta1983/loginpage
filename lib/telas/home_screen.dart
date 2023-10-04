@@ -17,15 +17,18 @@ class homePage extends StatelessWidget {
         title: const Text("Tela Inicial"),
       ),
       drawer: Drawer(
-        child: ListView(children: [
-          ListTile(
-            leading:  const Icon(Icons.logout), title:  const Text("Sair"), onTap: (){
-            ServiceAuthentication().logOut();
-          },
-          )
-        ],),
+        child: ListView(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text("Sair"),
+              onTap: () {
+                ServiceAuthentication().logOut();
+              },
+            )
+          ],
+        ),
       ),
-
     );
 
   }

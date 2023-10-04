@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:loginpage/telas/autenticacao_tela.dart';
 import 'package:loginpage/telas/home_screen.dart';
 import 'firebase_options.dart';
-
+import 'package:loginpage/telas/drawerUser.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +35,7 @@ class RouterScreen extends StatelessWidget {
       stream: FirebaseAuth.instance.userChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return const homePage();
+          return homePage2();
         } else {
           return const AutenticacaoTela();
         }
